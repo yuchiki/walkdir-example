@@ -20,18 +20,18 @@ func convertRoot(path string, srcRoot string, dstRoot string) string {
 }
 
 func convertJSONToYAML(jsonBytes []byte) ([]byte, error) {
-    var jsonObj interface{}
-    err := json.Unmarshal(jsonBytes, &jsonObj)
-    if err != nil {
-        return nil, err
-    }
+	var jsonObj interface{}
+	err := json.Unmarshal(jsonBytes, &jsonObj)
+	if err != nil {
+		return nil, err
+	}
 
-    yamlBytes, err := yaml.Marshal(jsonObj)
-    if err != nil {
-        return nil, err
-    }
+	yamlBytes, err := yaml.Marshal(jsonObj)
+	if err != nil {
+		return nil, err
+	}
 
-    return yamlBytes, nil
+	return yamlBytes, nil
 }
 
 func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
@@ -43,7 +43,6 @@ func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
 	if err != nil {
 		return fmt.Errorf("error cleaning up output directory: %w", err)
 	}
-
 
 	err = filepath.WalkDir(inputRoot, func(path string, d os.DirEntry, err error) error {
 		dstPath := convertPath(path)
@@ -57,7 +56,7 @@ func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
 		}
 
 		if err != nil {
-			return  wrapErr(err)
+			return wrapErr(err)
 		}
 
 		if d.IsDir() {
@@ -78,7 +77,7 @@ func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
 				return wrapErr(err)
 			}
 
-		 	err = os.WriteFile(dstYamlPath, yamlBytes, 0644)
+			err = os.WriteFile(dstYamlPath, yamlBytes, 0644)
 			return wrapErr(err)
 		} else {
 			err := os.WriteFile(dstPath, fileBytes, 0644)
@@ -87,5 +86,5 @@ func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
 	})
 
 	return err
-	
+
 }

@@ -1,8 +1,8 @@
 package main
 
 func main() {
-    inputRoot := "sampleInputRoot"
-    outputRoot := "generatedOutputRoot" 
+	inputRoot := "sampleInputRoot"
+	outputRoot := "generatedOutputRoot"
 
 	err := convertAllJsonFilesToYaml(inputRoot, outputRoot)
 	if err != nil {

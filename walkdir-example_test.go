@@ -4,22 +4,21 @@ import (
 	"testing"
 )
 
-
 func TestConvertRoot(t *testing.T) {
 	type args struct {
-		path     string
-		srcRoot  string
-		dstRoot  string
+		path    string
+		srcRoot string
+		dstRoot string
 	}
 	tests := []struct {
-		name string
-		args args
+		name     string
+		args     args
 		expected string
 	}{
 		{
 			name: "convert root of path from srcRoot to dstRoot",
 			args: args{
-				path: "a/b/c",
+				path:    "a/b/c",
 				srcRoot: "a",
 				dstRoot: "x",
 			},
@@ -28,7 +27,7 @@ func TestConvertRoot(t *testing.T) {
 		{
 			name: "does not change the path if the path has no srcRoot",
 			args: args{
-				path: "a/b/c",
+				path:    "a/b/c",
 				srcRoot: "x",
 				dstRoot: "y",
 			},
@@ -51,8 +50,8 @@ func TestConvertJSONToYAML(t *testing.T) {
 		jsonBytes []byte
 	}
 	tests := []struct {
-		name string
-		args args
+		name     string
+		args     args
 		expected string
 	}{
 		{
