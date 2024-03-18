@@ -90,8 +90,10 @@ func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
 		return fmt.Errorf("error cleaning up output directory: %w", err)
 	}
 
-	err = filepath.WalkDir(inputRoot, genConvertJSONFileToYamlWorkDirFunc(convertPath))
+	fileSystem := os.DirFS(".")
 
+	err = fs.WalkDir(fileSystem, inputRoot, genConvertJSONFileToYamlWorkDirFunc(convertPath))
+  
 	return err
 
 }
