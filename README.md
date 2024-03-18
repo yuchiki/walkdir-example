@@ -5,5 +5,5 @@ walkdir を使ってみるサンプル。
 
 # 使い方
 
-`go run .` をすると sampleInputRoot 以下のファイルが処理されて、generatedOutputRoot ディレクトリ以下にファイルが生成される。
-`go test` でテストがされる。
+- `go run .` をすると sampleInputRoot 以下のファイルが処理されて、generatedOutputRoot ディレクトリ以下にファイルが生成される。
+- `go test` でテストがされる。
