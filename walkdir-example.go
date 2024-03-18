@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
@@ -34,17 +35,9 @@ func convertJSONToYAML(jsonBytes []byte) ([]byte, error) {
 	return yamlBytes, nil
 }
 
-func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
-	convertPath := func(path string) string {
-		return convertRoot(path, inputRoot, outputRoot)
-	}
 
-	err := os.RemoveAll(outputRoot)
-	if err != nil {
-		return fmt.Errorf("error cleaning up output directory: %w", err)
-	}
-
-	err = filepath.WalkDir(inputRoot, func(path string, d os.DirEntry, err error) error {
+func genConvertJSONFileToYamlWorkDirFunc(convertPath func(string) string) fs.WalkDirFunc {
+	return func(path string, d os.DirEntry, err error) error {
 		dstPath := convertPath(path)
 
 		wrapErr := func(err error) error {
@@ -83,7 +76,21 @@ func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
 			err := os.WriteFile(dstPath, fileBytes, 0644)
 			return wrapErr(err)
 		}
-	})
+	}
+}
+
+
+func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
+	convertPath := func(path string) string {
+		return convertRoot(path, inputRoot, outputRoot)
+	}
+
+	err := os.RemoveAll(outputRoot)
+	if err != nil {
+		return fmt.Errorf("error cleaning up output directory: %w", err)
+	}
+
+	err = filepath.WalkDir(inputRoot, genConvertJSONFileToYamlWorkDirFunc(convertPath))
 
 	return err
 
