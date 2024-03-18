@@ -1,0 +1,24 @@
+{
+    "service_name": "B",
+    "service_purpose": "do B",
+    "service_version": "15.32.3",
+    "ports": [
+        {
+            "port": 30080,
+            "protocol": "http"
+        },
+        {
+            "port": 8443,
+            "protocol": "https"
+        },
+        {
+            "port": 22,
+            "protocol": "ssh"
+        },
+        {
+            "port": 21,
+            "protocol": "ftp"
+        }
+
+    ]
+}

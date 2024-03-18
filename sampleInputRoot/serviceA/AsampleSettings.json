@@ -1,0 +1,19 @@
+{
+    "service_name": "A",
+    "service_purpose": "do A",
+    "service_version": "1.0.0",
+    "ports": [
+        {
+            "port": 8080,
+            "protocol": "http"
+        },
+        {
+            "port": 443,
+            "protocol": "https"
+        },
+        {
+            "port": 22,
+            "protocol": "ssh"
+        }
+    ]
+}
