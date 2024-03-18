@@ -89,13 +89,3 @@ func convertAllJsonFilesToYaml(inputRoot string, outputRoot string) error {
 	return err
 	
 }
-
-func main() {
-    inputRoot := "sampleInputRoot"
-    outputRoot := "generatedOutputRoot" 
-
-	err := convertAllJsonFilesToYaml(inputRoot, outputRoot)
-	if err != nil {
-		panic(err)
-	}
-}
