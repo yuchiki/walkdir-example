@@ -11,11 +11,13 @@ import (
 )
 
 func convertRoot(path string, srcRoot string, dstRoot string) string {
-	relativePath, _ := filepath.Rel(srcRoot, path)
+	relativePath, err := filepath.Rel(srcRoot, path)
+	if err != nil {
+		return path
+	}
+
 	return filepath.Join(dstRoot, relativePath)
 }
-
-
 
 func convertJSONToYAML(jsonBytes []byte) ([]byte, error) {
     var jsonObj interface{}
